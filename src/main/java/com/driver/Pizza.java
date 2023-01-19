@@ -1,30 +1,21 @@
 package com.driver;
 
+import org.w3c.dom.ls.LSOutput;
+
 public class Pizza {
 
     private int price;
     private Boolean isVeg;
     private String bill;
-
-    boolean cheeseAdded = false;
-    boolean toppingsAdded = false;
-
-    private boolean takeawayAdded = false;
-
-    private int basePrice;
+    private boolean CheeseEx;
+    private boolean Toppings;
+    private boolean TakeAway;
+    private int total;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
+        price = this.isVeg?300:400;
         // your code goes here
-        if(isVeg == true){
-            this.price = 300;
-
-        }
-        else {
-            this.price = 400;
-
-        }
-        basePrice = this.price;
     }
 
     public int getPrice(){
@@ -32,57 +23,35 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-
-        if(!cheeseAdded) {
-
-            cheeseAdded = true;
-            this.price += 80;
-
+        // your code goes here
+        if (!CheeseEx){
+            CheeseEx = true;
+            price +=80;
         }
     }
 
     public void addExtraToppings(){
-       if(!toppingsAdded) {
-            toppingsAdded = true;
-            if (isVeg == true) {
-                price += 70;
-            } else {
-                price += 120;
-            }
-
+        // your code goes here
+        if(!Toppings){
+            Toppings=true;
+            price += isVeg?70:120;
         }
-
     }
 
     public void addTakeaway(){
-        if(!takeawayAdded){
-            takeawayAdded = true;
+        // your code goes here
+
+        if(!TakeAway){
+            TakeAway = true;
             price += 20;
         }
+
     }
 
     public String getBill(){
         // your code goes here
-        int toppings;
-        if(isVeg){
-            toppings = 70;
-        }
-        else{
-            toppings = 120;
-        }
-        StringBuilder str = new StringBuilder("");
-        str.append("Base Price for the Pizza is: "+ basePrice +'\n');
-        if(cheeseAdded){
-            str.append("Extra Cheese is Added: "+80+'\n');
-        }
-        if(toppingsAdded){
-            str.append("Extra Topping is Added: "+toppings+'\n');
-        }
-        if(takeawayAdded){
-            str.append("Paper bag is Added: "+20+'\n');
-        }
-        str.append("Total Price is: "+price+'\n');
-        bill = str.toString();
+        bill = "Base Price Of The Pizza: "+(isVeg?300:400)+"\n"+(CheeseEx?("Extra Cheese Added: "+80+"\n"):"")+(Toppings?("Extra Toppings Added: "+(isVeg?70:120)+"\n"):"")+
+                (TakeAway?("Paperbag Added: "+20+"\n"):"")+"Total Price: "+price+"\n";
         return this.bill;
     }
 }
